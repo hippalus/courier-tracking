@@ -1,0 +1,18 @@
+spring:
+  resources:
+    add-mappings: false
+  kafka:
+    producer:
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+  jackson:
+    serialization:
+      write_dates_as_timestamps: false
+data:
+  filePaths:
+    - /home/hisler/WS/courier-tracking/courier-geo-locations/data/Ortakoy-Courier6.csv
+    - /home/hisler/WS/courier-tracking/courier-geo-locations/data/Ortakoy-Courier6.csv
+    - /home/hisler/WS/courier-tracking/courier-geo-locations/data/Novada-Courier3.csv
+    - /home/hisler/WS/courier-tracking/courier-geo-locations/data/Caddebostan-Courier7.csv
+    - /home/hisler/WS/courier-tracking/courier-geo-locations/data/Beylikduzu-Courier5.csv
+    - /home/hisler/WS/courier-tracking/courier-geo-locations/data/Atasehir-Courier1.csv
+    - /home/hisler/WS/courier-tracking/courier-geo-locations/data/Atasehir-Coruier2.csv
