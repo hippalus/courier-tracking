@@ -1,0 +1,38 @@
+server:
+  port: 8081
+spring:
+  profiles:
+    active: prod
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: courier-event-consumer-group
+      auto-offset-reset: earliest
+  jackson:
+    serialization:
+      write_dates_as_timestamps: false
+kafka:
+  topic: GeoLocationOfCourier
+
+application:
+  clients:
+    hostname: localhost
+    scheme: http
+    httpPort: 9200
+    containerPort: 9200
+  index:
+    -
+      name: stores
+      shard: 2
+      replica: 1
+      from: 0
+      size: 5
+      timeout: 60
+    -
+      name: courier-location-event
+      shard: 2
+      replica: 1
+      from: 0
+      size: 5
+      timeout: 60
+
