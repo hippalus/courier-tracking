@@ -22,7 +22,7 @@ class CourierGeneratorTest {
     private static final Double ATASEHIR_LONGITUDE_134_METER = 29.12448200;
 
     @Autowired
-    private CourierGenerator courierGenerator;
+    private ICourierGenerator courierGenerator;
 
     @Test
     void contextLoad() {

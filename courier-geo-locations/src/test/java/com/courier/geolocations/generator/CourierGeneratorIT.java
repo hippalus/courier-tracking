@@ -38,7 +38,7 @@ public class CourierGeneratorIT {
     @Autowired
     private EmbeddedKafkaBroker embeddedKafka;
     @Autowired
-    private CourierGenerator courierGenerator;
+    private ICourierGenerator courierGenerator;
 
     @Test
     void should_generate_courier_event_and_send_to_kafka_topic(){

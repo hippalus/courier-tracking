@@ -16,11 +16,12 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @Component
 @RequiredArgsConstructor
-public class CourierGenerator {
+public class CourierGenerator implements ICourierGenerator {
     private final CsvFileReader fileReader;
     private final IKafkaProducerService producerService;
 
 
+    @Override
     public void generateAndSendEvent() {
         final var allCourierData = fileReader.getAllData();
         for (List<CsvBean> couriers : allCourierData) {
@@ -34,6 +35,7 @@ public class CourierGenerator {
         }
     }
 
+    @Override
     public void IfTheLocationIs100MetersToTheTargetWait1MinuteElseRandom(GeoLocationOfCourier prevEvent,
                                                                          GeoLocationOfCourier currentEvent) {
         if (prevEvent.getCourier().equals(currentEvent.getCourier()) &&
@@ -42,10 +44,11 @@ public class CourierGenerator {
             addEventTime(prevEvent, currentEvent, Duration.of(1, ChronoUnit.MINUTES));
         } else {
             addEventTime(prevEvent, currentEvent,
-                    Duration.of(ThreadLocalRandom.current().nextInt(30, 90), ChronoUnit.SECONDS));
+                    Duration.of(ThreadLocalRandom.current().nextInt(50, 130), ChronoUnit.SECONDS));
         }
     }
 
+    @Override
     public boolean isTheLocation100MetersFromTheTarget(GeoLocationOfCourier courier) {
         var location = LocationPoint.of(courier.getLatitude(), courier.getLongitude());
         return Stores.ALL_STORES
@@ -55,6 +58,7 @@ public class CourierGenerator {
                 .orElse(false);
     }
 
+    @Override
     public void addEventTime(GeoLocationOfCourier prevEvent, GeoLocationOfCourier currentEvent, Duration duration) {
         var eventTime = prevEvent.getEventTime();
         if (Objects.isNull(prevEvent.getEventTime())) {

@@ -20,8 +20,13 @@ import java.util.ServiceLoader;
 @Slf4j
 public class KafkaConsumerService implements IKafkaConsumerService {
 
-    @Autowired
+
     private ICourierEventRepository courierEventRepository;
+
+    @Autowired
+    public void setCourierEventRepository(ICourierEventRepository courierEventRepository) {
+        this.courierEventRepository = courierEventRepository;
+    }
 
     @Override
     @KafkaListener(topics = "${kafka.topic}")

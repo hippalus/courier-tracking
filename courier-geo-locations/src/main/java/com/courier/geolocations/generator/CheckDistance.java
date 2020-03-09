@@ -4,7 +4,6 @@ import java.util.Objects;
 
 import static com.courier.geolocations.generator.Constants.DISTANCE_FACTOR_METERS;
 
-@FunctionalInterface
 public interface CheckDistance {
 
     default boolean isTheLocation100MetersFromTheTarget(LocationPoint source) {
