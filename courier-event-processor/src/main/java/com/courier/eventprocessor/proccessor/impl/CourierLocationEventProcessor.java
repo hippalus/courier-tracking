@@ -24,6 +24,8 @@ public class CourierLocationEventProcessor implements StreamProcessor {
     public void process(CourierEventDocument event, ICourierEventRepository target) throws IOException {
         log.info(event.toString());
         target.saveEvent(event);
+        target.getCourierEvents("s");
+
     }
 
 }
