@@ -1,9 +1,10 @@
-package com.courier.eventprocessor.listener;
+package com.courier.eventprocessor;
 
-import com.courier.eventprocessor.TestUtils;
 import com.courier.eventprocessor.configuration.BaseKafkaConsumerTest;
 import com.courier.eventprocessor.configuration.KafkaBeansConfig;
-import com.courier.eventprocessor.model.GeoLocationOfCourier;
+import com.courier.eventprocessor.listener.IKafkaConsumerService;
+import com.courier.eventprocessor.model.CourierEvent;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -26,8 +27,7 @@ import static org.assertj.core.api.Assertions.fail;
 @Import(KafkaBeansConfig.class)
 @Slf4j
 @SpringBootTest
-public class KafkaConsumerServiceIT extends BaseKafkaConsumerTest {
-
+public class CourierEventProcessorApplicationTest extends BaseKafkaConsumerTest {
     @Configuration
     @ComponentScan(value = {"com.courier.eventprocessor.listener"})
     static class KafkaLocalTestConfig {
@@ -45,7 +45,7 @@ public class KafkaConsumerServiceIT extends BaseKafkaConsumerTest {
     public void should_receive_messages_from_kafka_topic() throws Exception {
 
         //given
-        var courierLocationEvent = GeoLocationOfCourier.builder()
+        var courierLocationEvent = CourierEvent.builder()
                 .eventTime(Instant.now())
                 .courier("TestCourier")
                 .latitude(41.0558328298673)
@@ -60,6 +60,7 @@ public class KafkaConsumerServiceIT extends BaseKafkaConsumerTest {
 
         //then:
         future.addCallback(new ListenableFutureCallback<>() {
+            @SneakyThrows
             @Override
             public void onSuccess(SendResult<String, String> result) {
 

@@ -15,6 +15,7 @@
     <properties>
         <java.version>11</java.version>
         <elasticsearch.version>7.5.2</elasticsearch.version>
+        <version.auto-service>1.0-rc5</version.auto-service>
     </properties>
 
     <dependencies>
@@ -86,7 +87,12 @@
             <version>3.3.0</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>com.google.auto.service</groupId>
+            <artifactId>auto-service</artifactId>
+            <version>${version.auto-service}</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>

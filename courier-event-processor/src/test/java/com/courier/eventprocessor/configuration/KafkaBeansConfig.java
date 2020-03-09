@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.kafka.annotation.EnableKafka;
 
 @TestConfiguration
-@Profile("kafka_test")
+@Profile("test")
 @EnableKafka
 public class KafkaBeansConfig {
 

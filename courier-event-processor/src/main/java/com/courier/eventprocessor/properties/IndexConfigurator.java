@@ -24,14 +24,13 @@ public class IndexConfigurator {
     private static final String TYPE = "type";
     private static final String GEO_POINT = "geo_point";
     private static final String DATE = "date";
-    private static final String DATE_TIME_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSSZZ";
 
-    private final RestHighLevelClient restHighLevelClient;
+    private final RestHighLevelClient client;
     private final ConfigProperties properties;
 
     @PostConstruct
     private void createIndexWithMapping() {
-        final var indicesClient = restHighLevelClient.indices();
+        final var indicesClient = client.indices();
         var storesRequest = new GetIndexRequest(properties.getIndex().get(STORES_YML_INDEX).getName());
         var courierRequest = new GetIndexRequest(properties.getIndex().get(COURIER_YML_INDEX).getName());
         try {
@@ -52,6 +51,7 @@ public class IndexConfigurator {
         }
 
     }
+
 
     private CreateIndexRequest getCourierIndex() throws IOException {
         var createIndexRequest = new CreateIndexRequest(properties.getIndex()
@@ -109,4 +109,5 @@ public class IndexConfigurator {
         createIndexRequest.mapping(contentBuilder);
         return createIndexRequest;
     }
+
 }

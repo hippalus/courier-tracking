@@ -1,15 +1,18 @@
 package com.courier.eventprocessor.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+
 
 import java.time.Instant;
 
 @Data
 @Builder
-public class GeoLocationOfCourier {
+@AllArgsConstructor
+public class CourierEventDocument {
     private Instant eventTime;
     private String courier;
-    private Double latitude;
-    private Double longitude;
+    private GeoPoint location;
+
 }
