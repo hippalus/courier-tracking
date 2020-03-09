@@ -8,7 +8,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.index.IndexRequest;
-import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
@@ -39,11 +38,11 @@ public class CourierEventRepository implements ICourierEventRepository {
     private final RestHighLevelClient client;
 
     @Override
-    public IndexResponse saveEvent(CourierEventDocument courier) throws IOException {
+    public void saveEvent(CourierEventDocument courier) throws IOException {
         var indexRequest = new IndexRequest(EVENT_INDEX_NAME);
         final var jsonString = Utils.getJsonString(courier);
         indexRequest.source(jsonString, XContentType.JSON);
-        return client.index(indexRequest, RequestOptions.DEFAULT);
+         client.index(indexRequest, RequestOptions.DEFAULT);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.courier.eventprocessor.listener;
+package com.courier.eventprocessor.service;
 
 import com.courier.eventprocessor.model.CourierEvent;
 import com.courier.eventprocessor.proccessor.EventProcessorFactory;

@@ -1,4 +1,4 @@
-package com.courier.eventprocessor.listener;
+package com.courier.eventprocessor.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.messaging.handler.annotation.Payload;

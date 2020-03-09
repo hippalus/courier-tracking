@@ -2,7 +2,7 @@ package com.courier.eventprocessor;
 
 import com.courier.eventprocessor.configuration.BaseKafkaConsumerTest;
 import com.courier.eventprocessor.configuration.KafkaBeansConfig;
-import com.courier.eventprocessor.listener.IKafkaConsumerService;
+import com.courier.eventprocessor.service.IKafkaConsumerService;
 import com.courier.eventprocessor.model.CourierEvent;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +29,7 @@ import static org.assertj.core.api.Assertions.fail;
 @SpringBootTest
 public class CourierEventProcessorApplicationTest extends BaseKafkaConsumerTest {
     @Configuration
-    @ComponentScan(value = {"com.courier.eventprocessor.listener"})
+    @ComponentScan(value = {"com.courier.eventprocessor.service"})
     static class KafkaLocalTestConfig {
     }
 

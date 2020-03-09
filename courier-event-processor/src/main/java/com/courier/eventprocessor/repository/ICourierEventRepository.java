@@ -2,7 +2,6 @@ package com.courier.eventprocessor.repository;
 
 import com.courier.eventprocessor.model.CourierEventDocument;
 import com.courier.eventprocessor.model.Store;
-import org.elasticsearch.action.index.IndexResponse;
 
 import java.io.IOException;
 import java.time.Duration;
@@ -13,7 +12,7 @@ import java.util.Set;
 
 public interface ICourierEventRepository {
 
-    IndexResponse saveEvent(CourierEventDocument courier) throws IOException;
+    void saveEvent(CourierEventDocument courier) throws IOException;
 
     Double getTotalTravelDistance(String courierId) throws IOException;
 
