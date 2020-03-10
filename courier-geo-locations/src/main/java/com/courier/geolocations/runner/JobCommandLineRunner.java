@@ -19,7 +19,7 @@ public class JobCommandLineRunner implements CommandLineRunner {
         while (shouldIRun) {
             try {
                 courierGenerator.generateAndSendEvent();
-                Thread.sleep((long) (Math.random() * 1000));
+                Thread.sleep(5000,500);
             } catch (InterruptedException e) {
                 shouldIRun = false;
                 Thread.currentThread().interrupt();

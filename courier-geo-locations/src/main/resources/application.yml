@@ -5,7 +5,7 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
     properties:
-      request.timeout.ms: 5000
+      request.timeout.ms: 3000
   jackson:
     serialization:
       write_dates_as_timestamps: false
@@ -18,4 +18,3 @@ data:
     - ./courier-geo-locations/data/Beylikduzu-Courier5.csv
     - ./courier-geo-locations/data/Atasehir-Courier1.csv
     - ./courier-geo-locations/data/Atasehir-Coruier2.csv
-

@@ -1,11 +1,11 @@
 FROM openjdk:11-jdk-slim
 
+EXPOSE 8081
+
 ADD target/*.jar /
+
+ADD run.sh /
 
 ADD pom.xml /pom.xml
 
-RUN echo $(ls -1 /)
-
-EXPOSE 8081
-
-ENTRYPOINT [ "java", "-jar", "courier-event-processor-1.0.jar"]
+ENTRYPOINT ["sh", "/run.sh"]

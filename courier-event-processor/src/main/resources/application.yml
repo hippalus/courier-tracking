@@ -6,6 +6,8 @@ spring:
       bootstrap-servers: kafka:9092
       group-id: courier-event-consumer-group
       auto-offset-reset: earliest
+      properties:
+        request.timeout.ms: 3000
   jackson:
     serialization:
       write_dates_as_timestamps: false
@@ -33,4 +35,3 @@ application:
       from: 0
       size: 5
       timeout: 60
-

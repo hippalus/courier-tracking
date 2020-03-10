@@ -23,7 +23,6 @@ public class KafkaProducerService implements IKafkaProducerService {
         final var jsonStringEvent = pojoToJson(locationOfCourier);
         if (Objects.nonNull(jsonStringEvent)) {
             kafkaTemplate.send(TOPIC_NAME, jsonStringEvent);
-            log.info(jsonStringEvent);
         }
     }
 }

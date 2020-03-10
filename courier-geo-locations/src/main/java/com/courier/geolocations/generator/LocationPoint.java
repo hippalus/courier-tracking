@@ -25,7 +25,6 @@ public class LocationPoint {
         var distance=ZERO;
         if (!point.equals(this)) {
             distance=calculateDistance(this.latitude,this.longitude,point.getLatitude(),point.getLongitude());
-            log.info("The distance between {}  and {} is {} ", this.toString(), point.toString(), distance);
         }
         return distance;
     }

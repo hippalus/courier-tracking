@@ -1,4 +1,9 @@
 version: '3.2'
+
+networks:
+  mynetwork:
+    driver: bridge
+
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:5.2.2
@@ -9,8 +14,6 @@ services:
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
-    networks:
-      - esnet1
 
   kafka:
     image: confluentinc/cp-enterprise-kafka:5.2.2
@@ -25,7 +28,7 @@ services:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://kafka:9092
       KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
@@ -36,12 +39,11 @@ services:
       CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
     volumes:
       - ./kafka/data:/var/lib/kafka/data
-    networks:
-      - esnet1
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.5.2
     container_name: elasticsearch
+    hostname: elasticsearch
     ports:
       - 9200:9200
       - 9300:9300
@@ -50,11 +52,8 @@ services:
       - http.host= 0.0.0.0
       - transport.host=127.0.0.1
       - xpack.security.enabled=false
-      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - ES_JAVA_OPTS=-Xms750m -Xmx750m
       - bootstrap.memory_lock=true
-    volumes:
-      - ./elasticsearch/data:/usr/share/elasticsearch/data
-
 
   locations:
     image: courier-geo-locations:latest
@@ -68,7 +67,7 @@ services:
     hostname: eventprocessor
     depends_on:
       - zookeeper
+      - locations
     container_name: courier-event-processor
     ports:
       - "8081:8081"
-
