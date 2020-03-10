@@ -11,7 +11,8 @@
   
   See to https://nmeagen.org/
   
-  ![Atasehir-Courier-rotation](https://user-images.githubusercontent.com/17534654/76302807-aee2af80-62d1-11ea-8a04-990e8148671c.png)
+  ![Atasehir-Courier1-Rota](https://user-images.githubusercontent.com/17534654/76303031-1698fa80-62d2-11ea-86a3-b152d561b686.png)
+
 
   
   #### 2.module courier-event-processor
