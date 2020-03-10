@@ -24,12 +24,26 @@
   From Kafka topic  processes the data consumes according to the conditions.
   
 ## How to run?
-
-  ### go to courier-tracking root directory
+  ### Requeriment
+      
+      java version 11
+      
+      Docker
+      
+  ### Go to courier-tracking root directory
   
      mvn clean install
      
      sh run.sh
+     
+## MY TODO LIST 
+  - Refactoring and add common module.
+  
+  - More integration and unit tests.
+  
+  - Segregate application profiles. For example prod-profile test-profile dev-profile container-profile.
+  
+  
   
     
       
