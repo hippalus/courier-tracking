@@ -3,6 +3,7 @@
 ## This project contains 2 modules.
 
   #### 1.module courier-geo-locations
+  
   It generates the time series-shaped courier location information and send it to the kafka topic.
   
   This module feeds the courier-event-processor module.
@@ -13,17 +14,19 @@
   
   ![Atasehir-Courier1-Rota](https://user-images.githubusercontent.com/17534654/76303031-1698fa80-62d2-11ea-86a3-b152d561b686.png)
 
-
   
   #### 2.module courier-event-processor
-  This module processes and saves courier location data in real time.
+  
+  This module processes courier location data in real time and saves it to ElasticSearch.
   
   Logs the couriers' entry events to the  stores
   
   From Kafka topic  processes the data consumes according to the conditions.
   
 ## How to run?
+
   ### go to courier-tracking root directory
+  
      mvn clean install
      
      sh run.sh
