@@ -10,8 +10,10 @@ import com.opencsv.bean.MappingStrategy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ResourceUtils;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -27,13 +29,21 @@ public class CsvFileReader {
 
     public List<List<CsvBean>> getAllData() {
         return properties.getFilePaths().stream()
-                .map(file -> beanBuilderWithColumnPosition(Path.of(file), GeoLocationOfCourier.class))
+                .map(file -> {
+                    try {
+                        return beanBuilderWithColumnPosition(ResourceUtils.getFile(file).toPath(), GeoLocationOfCourier.class);
+                    } catch (FileNotFoundException e) {
+                       log.error("Invalid File {}.",file);
+                    }
+                    return null;
+                })
                 .collect(Collectors.toList());
 
     }
 
     @SuppressWarnings("rawtypes")
     public List<CsvBean> beanBuilderWithColumnPosition(Path path, Class clazz) {
+
         ColumnPositionMappingStrategy ms = new ColumnPositionMappingStrategy();
         return beanBuilder(path, clazz, ms);
     }

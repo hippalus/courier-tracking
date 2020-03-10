@@ -1,0 +1,172 @@
+{
+	"info": {
+		"_postman_id": "36e70d20-91b9-4ddd-b7c5-722c0d7f772d",
+		"name": "courier-tracking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "bulk-stores",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"index\":{ \"_id\": \"1\"}}\n{\"name\": \"Ataşehir MMM Migros\", \"location\": {\"lat\": 40.9923307, \"lon\": 29.1244229}}\n{\"index\":{ \"_id\": \"2\"}}\n{\"name\": \"Novada MMM Migros\", \"location\": {\"lat\": 40.986106, \"lon\": 29.1161293}}\n{\"index\":{ \"_id\": \"3\"}}\n{\"name\": \"Beylikdüzü 5M Migros\", \"location\": {\"lat\": 41.0066851, \"lon\": 28.6552262}}\n{\"index\":{ \"_id\": \"4\"}}\n{\"name\": \"Ortaköy MMM Migros\", \"location\": {\"lat\": 41.055783, \"lon\": 29.0210292}}\n{\"index\":{ \"_id\": \"5\"}}\n{\"name\": \"Caddebostan MMM Migros\", \"location\": {\"lat\": 40.9632463, \"lon\": 29.0630908}}\n\n\n\n\n\n\n\n\n\n"
+				},
+				"url": {
+					"raw": "http://localhost:9200/stores/_bulk",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"stores",
+						"_bulk"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getTotalTravelDistance",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/courier/gettotaltraveldistance/?courierId=Courier-1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"courier",
+						"gettotaltraveldistance",
+						""
+					],
+					"query": [
+						{
+							"key": "courierId",
+							"value": "Courier-1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getTotalTravelDistance2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/courier/gettotaltraveldistance/?courierId=Courier-7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"courier",
+						"gettotaltraveldistance",
+						""
+					],
+					"query": [
+						{
+							"key": "courierId",
+							"value": "Courier-7"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getTotalTravelDistance3",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/courier/gettotaltraveldistance/?courierId=Courier-3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"courier",
+						"gettotaltraveldistance",
+						""
+					],
+					"query": [
+						{
+							"key": "courierId",
+							"value": "Courier-3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getTotalTravelDistance4",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/courier/gettotaltraveldistance/?courierId=Courier-5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"courier",
+						"gettotaltraveldistance",
+						""
+					],
+					"query": [
+						{
+							"key": "courierId",
+							"value": "Courier-5"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
