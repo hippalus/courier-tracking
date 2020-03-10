@@ -18,8 +18,8 @@ public class JobCommandLineRunner implements CommandLineRunner {
         boolean shouldIRun = true;
         while (shouldIRun) {
             try {
+                Thread.sleep(4000,500);
                 courierGenerator.generateAndSendEvent();
-                Thread.sleep(5000,500);
             } catch (InterruptedException e) {
                 shouldIRun = false;
                 Thread.currentThread().interrupt();
