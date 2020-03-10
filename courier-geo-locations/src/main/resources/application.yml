@@ -1,19 +1,21 @@
 spring:
   kafka:
     producer:
-      bootstrap-servers: localhost:9092
+      bootstrap-servers: kafka:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    properties:
+      request.timeout.ms: 5000
   jackson:
     serialization:
       write_dates_as_timestamps: false
 data:
   filePaths:
-    - /home/hisler/WS/courier-tracking/courier-geo-locations/data/Ortakoy-Courier6.csv
-    - /home/hisler/WS/courier-tracking/courier-geo-locations/data/Ortakoy-Courier6.csv
-    - /home/hisler/WS/courier-tracking/courier-geo-locations/data/Novada-Courier3.csv
-    - /home/hisler/WS/courier-tracking/courier-geo-locations/data/Caddebostan-Courier7.csv
-    - /home/hisler/WS/courier-tracking/courier-geo-locations/data/Beylikduzu-Courier5.csv
-    - /home/hisler/WS/courier-tracking/courier-geo-locations/data/Atasehir-Courier1.csv
-    - /home/hisler/WS/courier-tracking/courier-geo-locations/data/Atasehir-Coruier2.csv
+    - ./courier-geo-locations/data/Ortakoy-Courier6.csv
+    - ./courier-geo-locations/data/Ortakoy-Courier6.csv
+    - ./courier-geo-locations/data/Novada-Courier3.csv
+    - ./courier-geo-locations/data/Caddebostan-Courier7.csv
+    - ./courier-geo-locations/data/Beylikduzu-Courier5.csv
+    - ./courier-geo-locations/data/Atasehir-Courier1.csv
+    - ./courier-geo-locations/data/Atasehir-Coruier2.csv
 
