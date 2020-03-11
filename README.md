@@ -36,6 +36,10 @@
      
      sh run.sh
      
+ ### Check out the development branch to try locally
+ 
+     git checkout origin/development
+     
 ## MY TODO LIST 
   - Refactoring and add common module.
   
