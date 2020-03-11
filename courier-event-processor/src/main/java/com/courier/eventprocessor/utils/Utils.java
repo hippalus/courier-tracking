@@ -23,7 +23,6 @@ public final class Utils {
             mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
             mapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
             mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-
             mapper.registerModule(new JavaTimeModule());
         }
         return mapper;

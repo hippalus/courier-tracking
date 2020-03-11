@@ -5,6 +5,7 @@ import com.courier.geolocations.bean.GeoLocationOfCourier;
 import com.courier.geolocations.filereader.CsvFileReader;
 import com.courier.geolocations.service.IKafkaProducerService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
@@ -16,6 +17,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class CourierGenerator implements ICourierGenerator {
     private final CsvFileReader fileReader;
     private final IKafkaProducerService producerService;
@@ -30,7 +32,9 @@ public class CourierGenerator implements ICourierGenerator {
                 var current = (GeoLocationOfCourier) couriers.get(i);
                 IfTheLocationIs100MetersToTheTargetWait1MinuteElseRandom(prev, current);
                 producerService.send(prev);
+                log.info("Previous Event {}",prev.toString());
                 producerService.send(current);
+                log.info("Current Event {}",current.toString());
             }
         }
     }

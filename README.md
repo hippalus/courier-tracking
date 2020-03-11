@@ -23,8 +23,8 @@
   
   From Kafka topic  processes the data consumes according to the conditions.
   
-## How to run?
-  ### Requeriment
+## How to run in local?
+  ### Requirements
       
       java version 11
       
@@ -35,6 +35,15 @@
      mvn clean install
      
      sh run.sh
+     
+  ### Go to courier-geo-locations directory 
+     mvn spring-boot:run
+     
+  ### Go to courier-event-processor directory 
+     mvn spring-boot:run
+          
+          
+        
      
 ## MY TODO LIST 
   - Refactoring and add common module.

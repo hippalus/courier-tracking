@@ -4,6 +4,7 @@ import com.courier.eventprocessor.model.CourierEventDocument;
 import com.courier.eventprocessor.proccessor.StreamProcessor;
 import com.courier.eventprocessor.repository.ICourierEventRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.CollectionUtils;
 
 import java.io.IOException;
 import java.time.Duration;
@@ -24,25 +25,28 @@ public class CourierLocationEventProcessor implements StreamProcessor {
 
     @Override
     public void process(CourierEventDocument event, ICourierEventRepository eventRepository) throws IOException {
-        eventRepository.saveEvent(event);
+
         final var lastCourierEvent = eventRepository.getLastCourierEvent(event.getCourier());
         if (lastCourierEvent.isPresent()) {
-            final var doesItMatchTheMaxDistance = eventRepository.getDistanceToStores(event).values()
-                    .stream()
-                    .anyMatch(dist -> dist <= maxDistance);
-            final var timeDiff = eventRepository.getTheTimeDifferenceBetweenTheLastRecording(event);
-
             final var distanceRuleWithStore = eventRepository.getDistanceToStores(event)
                     .entrySet()
                     .stream()
                     .filter(storeDistEntry -> storeDistEntry.getValue() <= maxDistance)
                     .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-
-            if (doesItMatchTheMaxDistance && timeDiff.compareTo(maxTime) >= 0) {
-                log.info("Courier {} {} entered the store at a distance of {} meters in {}.", event.getCourier(),
-                        distanceRuleWithStore.keySet(), distanceRuleWithStore.values(),event.getEventTime());
+            if (!CollectionUtils.isEmpty(distanceRuleWithStore) &&
+                    isTheEventTimeDifferenceGreaterThanTheMaximumTime(event, lastCourierEvent.get())) {
+                log.info("Courier {} {} entered the store at a distance of {} meters in {}.",
+                        event.getCourier(),distanceRuleWithStore.keySet(),
+                        distanceRuleWithStore.values(), event.getEventTime());
             }
         }
+        eventRepository.saveEvent(event);
+
+    }
+
+    private boolean isTheEventTimeDifferenceGreaterThanTheMaximumTime(CourierEventDocument current, CourierEventDocument prev) {
+        final var between = Duration.between(current.getEventTime(), prev.getEventTime());
+        return between.compareTo(maxTime)>0;
     }
 
 }

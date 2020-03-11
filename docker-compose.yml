@@ -1,49 +1,45 @@
 version: '3.2'
 
-networks:
-  mynetwork:
-    driver: bridge
-
 services:
-  zookeeper:
+  zookeeper-local:
     image: confluentinc/cp-zookeeper:5.2.2
-    hostname: zookeeper
-    container_name: zookeeper
+    hostname: zookeeper-local
+    container_name: zookeeper-local
     ports:
       - "2181:2181"
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
 
-  kafka:
+  kafka-local:
     image: confluentinc/cp-enterprise-kafka:5.2.2
-    hostname: kafka
-    container_name: kafka
+    hostname: kafka-local
+    container_name: kafka-local
     depends_on:
-      - zookeeper
+      - zookeeper-local
     ports:
       - "29092:29092"
       - "9092:9092"
     environment:
       KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper-local:2181'
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://kafka:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-local:29092,PLAINTEXT_HOST://localhost:9092
       KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
-      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka:29092
-      CONFLUENT_METRICS_REPORTER_ZOOKEEPER_CONNECT: zookeeper:2181
+      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka-local:29092
+      CONFLUENT_METRICS_REPORTER_ZOOKEEPER_CONNECT: zookeeper-local:2181
       CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
       CONFLUENT_METRICS_ENABLE: 'true'
       CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
     volumes:
       - ./kafka/data:/var/lib/kafka/data
 
-  elasticsearch:
+  elasticsearch-local:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.5.2
-    container_name: elasticsearch
-    hostname: elasticsearch
+    container_name: elasticsearch-local
+    hostname: elasticsearch-local
     ports:
       - 9200:9200
       - 9300:9300
@@ -54,20 +50,3 @@ services:
       - xpack.security.enabled=false
       - ES_JAVA_OPTS=-Xms750m -Xmx750m
       - bootstrap.memory_lock=true
-
-  locations:
-    image: courier-geo-locations:latest
-    hostname: locations
-    depends_on:
-      - zookeeper
-    container_name: courier-geo-locations
-
-  eventprocessor:
-    image: courier-event-processor:latest
-    hostname: eventprocessor
-    depends_on:
-      - zookeeper
-      - locations
-    container_name: courier-event-processor
-    ports:
-      - "8081:8081"

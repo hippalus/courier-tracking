@@ -3,7 +3,7 @@ server:
 spring:
   kafka:
     consumer:
-      bootstrap-servers: kafka:9092
+      bootstrap-servers: localhost:9092
       group-id: courier-event-consumer-group
       auto-offset-reset: earliest
       properties:
@@ -16,7 +16,7 @@ kafka:
 
 application:
   clients:
-    hostname: elasticsearch
+    hostname: localhost
     scheme: http
     httpPort: 9200
     containerPort: 9200
