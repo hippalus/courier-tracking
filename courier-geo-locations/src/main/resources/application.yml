@@ -12,7 +12,7 @@ spring:
 data:
   filePaths:
     - ./courier-geo-locations/data/Ortakoy-Courier6.csv
-    - ./courier-geo-locations/data/Ortakoy-Courier6.csv
+    - ./courier-geo-locations/data/Novada-Courier4.csv
     - ./courier-geo-locations/data/Novada-Courier3.csv
     - ./courier-geo-locations/data/Caddebostan-Courier7.csv
     - ./courier-geo-locations/data/Beylikduzu-Courier5.csv

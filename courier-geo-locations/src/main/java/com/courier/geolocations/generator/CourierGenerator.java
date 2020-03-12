@@ -30,7 +30,6 @@ public class CourierGenerator implements ICourierGenerator {
                 var current = (GeoLocationOfCourier) couriers.get(i);
                 IfTheLocationIs100MetersToTheTargetWait1MinuteElseRandom(prev, current);
                 producerService.send(prev);
-                producerService.send(current);
             }
         }
     }
